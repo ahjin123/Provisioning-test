@@ -10,7 +10,7 @@
     vpc_cidr_block: 10.210.0.0/16
     subnet_cidr_block: 10.210.1.0/24
     instance_image: ami-06098fd00463352b6
-    ec2_key_name: ajkim-key
+    ec2_key_name: ajkim-key1
     instance_type: t2.micro
     
   tasks:
