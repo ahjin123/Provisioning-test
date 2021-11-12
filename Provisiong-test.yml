@@ -2,7 +2,7 @@
 
 - name: provisioning-test
   hosts: localhost 
-  connection: localhost
+  connection: local
   gather_facts: false
   vars:
     aws_region: ap-northeast-2
