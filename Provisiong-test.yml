@@ -1,7 +1,7 @@
 ---
 
 - name: provisioning-test
-  host: localhost 
+  hosts: localhost 
   connection: localhost
   gather_facts: false
   vars:
