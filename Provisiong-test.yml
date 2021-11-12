@@ -1,0 +1,35 @@
+---
+
+- name: provisioning-test
+  host: localhost 
+  connection: localhost
+  gather_facts: false
+  vars:
+    aws_region: ap-northeast-2
+    vpc_name: simple-vpc
+    vpc_cidr_block: 10.210.0.0/16
+    subnet_cidr_block: 10.210.1.0/24
+    instance_image: ami-06098fd00463352b6
+    ec2_key_name: ajkim-key
+    instance_type: t2.micro
+    
+  tasks:
+  - name: create a VPC with dedicated tenancy and a couple of tags
+    ec2_vpc_net:
+      name: "{{ vpc_name }}"
+      cidr_block: "{{ vpc_cidr_block }}"
+      region: "{{ aws_region }}"
+      tags:
+        name: Test-vpc
+        tenancy: default
+    register: result_vpc
+    
+  - name: Create subnet for database servers
+    ec2_vpc_subnet:
+      state: present
+      region: "{{ aws_region }}"
+      vpc_id: "{{ result_vpc.cpc.id }}"
+      cidr: "{{ subnet_cidr_block }}"
+      tags:
+        Name: Webserver Subnet
+    register: result_subnet
